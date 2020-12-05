@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from time import gmtime, strftime
 
 
 headers = {
@@ -7,7 +8,22 @@ headers = {
     'Content-Type': 'text/html',
 }
 
+#recebe o html do site
 html_content = requests.get('https://www.globo.com', headers=headers).text
 
+strNow = strftime("%Y-%m-%d %H %M %S", gmtime()) 
+
+
+#recebe o html do site
+html_content = requests.get('https://www.globo.com', headers=headers).text
+#realiza o parse do html utilizando lxml parser
 soup = BeautifulSoup(html_content, "lxml")
-print(soup.prettify())
+
+output_file = open("csvFile.csv", "a")
+output_file.write("Tipo;Notícia;Link\n")
+
+for title in soup.find_all("p", attrs={"hui-premium__title"}):
+	output_file.write("Principal;{}".format(title.text))
+	output_file.write("\n")
+
+
