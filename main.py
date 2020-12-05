@@ -13,17 +13,19 @@ html_content = requests.get('https://www.globo.com', headers=headers).text
 
 strNow = strftime("%Y-%m-%d %H %M %S", gmtime()) 
 
-
 #recebe o html do site
 html_content = requests.get('https://www.globo.com', headers=headers).text
 #realiza o parse do html utilizando lxml parser
 soup = BeautifulSoup(html_content, "lxml")
 
-output_file = open("csvFile.csv", "a")
+output_file = open(strNow+"csvFile.csv", "a")
 output_file.write("Tipo;Notícia;Link\n")
 
 for title in soup.find_all("p", attrs={"hui-premium__title"}):
-	output_file.write("Principal;{}".format(title.text))
+	output_file.write("Principal;{};".format(title.text))
+	
+	parent = title.find_parent("a")
+	output_file.write("{}".format(parent.get("href")))
 	output_file.write("\n")
 
 
