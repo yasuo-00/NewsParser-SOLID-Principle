@@ -1,7 +1,13 @@
+# -*- coding: latin-1 -*-
 from bs4 import BeautifulSoup
 import requests
 from time import gmtime, strftime
 
+def generate_file_name(extension):
+	strNow = strftime("%Y-%m-%d %H %M %S", gmtime()) 
+	file_name = strNow + "csvFile."+extension
+
+	return file_name
 
 def get_title_link(tag_name, attributes, html_content):
 	soup = BeautifulSoup(html_content, "lxml")
@@ -14,14 +20,14 @@ def get_title_link(tag_name, attributes, html_content):
 	return dict_title_link
 
 def write_title_link(type, dict, file_address):
-	output_file=open(file_address,"a")
+	output_file=open(file_address,"a", encoding = "utf-8")
 	for element in dict:
 		output_file.write("{};{};{}".format(type,element, dict[element]))
 		output_file.write("\n")
 	output_file.close()
 
 def write_on_file(html_content, primary_title_tag, secondary_title_tag, file_address):
-	output_file = open(file_address,"a")
+	output_file = open(file_address,"a", encoding = "utf-8")
 	split_primary_title_tag = primary_title_tag.split('.')
 	split_secondary_title_tag = secondary_title_tag.split('.')
 
@@ -41,13 +47,11 @@ headers = {
 }
 
 
-strNow = strftime("%Y-%m-%d %H %M %S", gmtime()) 
-
 #recebe o html do site
 html_content = requests.get('https://www.globo.com', headers=headers).text.encode("utf-8")
 #realiza o parse do html utilizando lxml parser
 soup = BeautifulSoup(html_content, "lxml")
 
-file_address=strNow+"csvFile.csv"
+file_address= generate_file_name("csv")
 
 write_on_file(html_content, "p.hui-premium__title", "p.hui-highlight-title", file_address)
