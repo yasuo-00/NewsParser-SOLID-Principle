@@ -27,7 +27,7 @@ def run():
 	}
 
 	#endereco a partir do main
-	FILE_ADDRESS = "src/siteList/siteList.csv"
+	FILE_ADDRESS = "input/siteList.csv"
 	file = open(FILE_ADDRESS)
 	dict_site = read_site_list(FILE_ADDRESS)
 
