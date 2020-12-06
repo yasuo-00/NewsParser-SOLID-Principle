@@ -17,7 +17,6 @@ def read_site_list(file_address):
 def generate_file_name(extension):
 	strNow = strftime("%Y-%m-%d %H %M %S", gmtime()) 
 	file_name = strNow + "csvFile."+extension
-
 	return file_name
 
 def get_title_link(tag_name, attributes, html_content):
@@ -42,16 +41,13 @@ def write_on_file(html_content, primary_title_tag, secondary_title_tag, file_add
 	split_primary_title_tag = primary_title_tag.split('.')
 	split_secondary_title_tag = secondary_title_tag.split('.')
 
-	print(split_secondary_title_tag[0])
-	print(split_secondary_title_tag[1])
-
 	output_file.write("Tipo;Notícia;Link\n")
 	output_file.close()
 
 	dict_title_link = get_title_link(split_primary_title_tag[0],split_primary_title_tag[1], html_content)
 	
 	write_title_link("Primário", dict_title_link, file_address)
-	#dict_title_link.clear()
+	dict_title_link.clear()
 	dict_title_link = get_title_link(split_secondary_title_tag[0],split_secondary_title_tag[1], html_content)
 	write_title_link("Secundário", dict_title_link, file_address)
 
