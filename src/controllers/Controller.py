@@ -1,4 +1,7 @@
 # -*- coding: latin-1 -*-
+#--------------------------------------------
+#CONTROLADOR PRINCIPAL
+#--------------------------------------------
 from bs4 import BeautifulSoup
 from time import gmtime, strftime
 import requests
