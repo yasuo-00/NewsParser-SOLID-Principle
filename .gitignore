@@ -1,2 +1,3 @@
 *.csv
 !src/*.csv
+**/__pycache__
