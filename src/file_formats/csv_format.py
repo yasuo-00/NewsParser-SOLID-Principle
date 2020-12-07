@@ -1,5 +1,5 @@
 
-#le um arquivo csv e retorna um dicionario com chave "endereco do site" contendo uma lista de tags 
+#le um arquivo csv e retorna um dicionario com chave "endereco do site" contendo uma lista de tags( no formato tag.class)
 def read_csv_file(file_address):
 	dict_site={}
 	#abre o arquivo csv e ignora o header (primeira linha)
@@ -15,7 +15,7 @@ def read_csv_file(file_address):
 
 #escreve o cabecalho no arquivo csv vazio
 def write_csv_header(header, file_address):
-	output_file=open(file_address,"a", encoding = "latin-1")
+	output_file=open(file_address,"a")
 	#itera por todos os elementos da lista header menos o ultimo elemento
 	for h in header[:-1]:
 		output_file.write(h+";")
@@ -24,7 +24,7 @@ def write_csv_header(header, file_address):
 
 #escreve em um arquivo csv, o tipo, o conteudo da tag(do titulo de noticia), e o link
 def write_csv(file_address, dict, type):
-	output_file=open(file_address,"a", encoding = "latin-1")
+	output_file=open(file_address,"a")
 	for dict_element in dict:
 		output_file.write("{};{};{}".format(type, dict_element, dict[dict_element]))
 		output_file.write("\n")

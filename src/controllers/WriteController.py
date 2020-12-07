@@ -1,4 +1,3 @@
-# -*- coding: latin-1 -*-
 #--------------------------------------------
 #CONTROLADOR DE ESCRITA
 #--------------------------------------------
@@ -25,9 +24,9 @@ def write_tag_title_link(type, dict, file_address):
 
 	if(file_type=="csv"):
 		write_csv(file_address,dict, type)
-#escreve no arquivo de saída o conteudo das tag primaria e secundaria
+#escreve no arquivo de saída o conteudo das tag primaria e secundaria (formato tag.class)
 def write_news_headline(html_content, primary_title_tag, secondary_title_tag, file_address):
-	output_file = open(file_address,"a", encoding = "latin-1")
+	output_file = open(file_address,"a")
 	split_primary_title_tag = primary_title_tag.split('.')
 	split_secondary_title_tag = secondary_title_tag.split('.')
 	header  = ["Tipo", "Notícia", "Link"]
